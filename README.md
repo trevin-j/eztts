@@ -1,12 +1,47 @@
 # EZTTS
 
-Easy Text To Speech is a simple Python module used to generate speech from text. It has support for multiple voices and will eventually support a few more languages than just English.
+Easy Text To Speech is a simple Python module used to generate speech from text. It has support for multiple voices and languages.
 
-I'm not even sure if I'm really supposed to just use fromtexttospeech.com's hidden API, but oh well. Its robots.txt file doesn't really block anything and I couldn't find any restrictions on usage.
+I'm not even sure if I'm really supposed to just use fromtexttospeech.com's hidden API, but oh well. Its robots.txt file doesn't really block anything and I couldn't find any restrictions on usage. I am curious what API this website uses for TTS in its backend.
+
+## Supported Languages, Voices, and Speeds
+
+### Supported Languages
+* US English
+* UK English
+* French
+* Spanish
+* German
+
+### Supported Voices
+* US English:
+    * Alice
+    * Daisy
+    * George
+    * Jenna
+    * John
+* UK English:
+    * Emma
+    * Harry
+* French:
+    * Jade
+    * Gabriel
+* Spanish:
+    * Isabella
+    * Mateo
+* German:
+    * Michael
+    * Nadine
+
+### Supported Speeds
+* Slow
+* Normal
+* Fast
+* Very Fast
 
 ## Installation
 
-This isn't currently a package on PyPI, so to use, simply clone the repo and copy the `eztts.py` file, or just directly download the file and put it in your project.
+This isn't currently a *package on PyPI, so to use, simply clone the repo and copy the `eztts.py` file, or just directly download the file and put it in your project.
 
 ### Dependencies
 
@@ -64,6 +99,11 @@ language = Language.ENGLISH_UK
 speed = Speed.SLOW
 save_tts_mp3(text, fileout, voice=voice, language=language, speed=speed)
 ```
+
+Specifying parameters:
+* Voice: `Voice.{Language}.{NAME}`
+* Language: `Language.{LANGUAGE_NAME}`
+* Speed: `Speed.{SPEED_NAME}`
 
 Also, you may print logging info to the console, and save a degub html file by passing "debug=True" to the function.
 
