@@ -60,7 +60,7 @@ Using Harry voice, which is a brittish voice, in slow speed, generated to `harry
 text = "But I'm just Harry."
 fileout = "harry_tts.mp3"
 voice = Voice.EnglishUK.HARRY
-language = Language.ENGLISH_BRITISH
+language = Language.ENGLISH_UK
 speed = Speed.SLOW
 save_tts_mp3(text, fileout, voice=voice, language=language, speed=speed)
 ```
