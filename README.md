@@ -65,6 +65,8 @@ speed = Speed.SLOW
 save_tts_mp3(text, fileout, voice=voice, language=language, speed=speed)
 ```
 
+Also, you may print logging info to the console, and save a degub html file by passing "debug=True" to the function.
+
 ### Exceptions
 
 I haven't spent enough time working with exceptions, so you'll probably run into them. They will likely be thrown only with network errors of some sort. You'll have to deal with them outside of the function. If you run into a reocurring issue, open an issue on the GitHub repo.
