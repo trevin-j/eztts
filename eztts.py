@@ -17,6 +17,10 @@ class Voice:
         EnglishUK:
             EMMA
             HARRY
+
+        French:
+            JADE
+            GABRIEL
     """
     class EnglishUS:
         ALICE = "IVONA Kimberly22"
@@ -28,6 +32,10 @@ class Voice:
     class EnglishUK:
         EMMA = "IVONA Amy22 (UK English)"
         HARRY = "IVONA Brian22 (UK English)"
+
+    class French:
+        JADE = "IVONA CΘline22 (French)"
+        GABRIEL = "IVONA Mathieu22 (French)"
 
 class Speed:
     """
@@ -46,9 +54,12 @@ class Language:
     """
     Supported languages:
         ENGLISH_US
+        ENGLISH_UK
+        FRENCH
     """
     ENGLISH_US = "US English"
-    ENGLISH_BRITISH = "British English"
+    ENGLISH_UK = "British English"
+    FRENCH = "French"
 
 def save_tts_mp3(text: str, filename: str, voice: str=Voice.EnglishUS.ALICE, language: str=Language.ENGLISH_US, speed: int=Speed.MEDIUM, debug: bool=False) -> None:
     if debug:
@@ -134,7 +145,7 @@ if __name__ == "__main__":
 
     voice = Voice.EnglishUK.HARRY
 
-    language = Language.ENGLISH_BRITISH
+    language = Language.ENGLISH_UK
 
     speed = Speed.MEDIUM
 
