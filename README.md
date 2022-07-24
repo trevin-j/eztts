@@ -78,7 +78,7 @@ import eztts
 Simple way:
 
 ```Python
-save_tts_mp3("Text to turn to speech", "output.mp3")
+eztts.save_tts_mp3("Text to turn to speech", "output.mp3")
 ```
 
 This will generate speech using the default voice "Alice", which is a US English voice. It also defaults to "medium" speed.
@@ -94,16 +94,16 @@ Using Harry voice, which is a brittish voice, in slow speed, generated to `harry
 ```Python
 text = "But I'm just Harry."
 fileout = "harry_tts.mp3"
-voice = Voice.EnglishUK.HARRY
-language = Language.ENGLISH_UK
-speed = Speed.SLOW
-save_tts_mp3(text, fileout, voice=voice, language=language, speed=speed)
+voice = eztts.Voice.EnglishUK.HARRY
+language = eztts.Language.ENGLISH_UK
+speed = eztts.Speed.SLOW
+eztts.save_tts_mp3(text, fileout, voice=voice, language=language, speed=speed)
 ```
 
 Specifying parameters:
-* Voice: `Voice.{Language}.{NAME}`
-* Language: `Language.{LANGUAGE_NAME}`
-* Speed: `Speed.{SPEED_NAME}`
+* Voice: `eztts.Voice.{Language}.{NAME}`
+* Language: `eztts.Language.{LANGUAGE_NAME}`
+* Speed: `eztts.Speed.{SPEED_NAME}`
 
 Also, you may print logging info to the console, and save a degub html file by passing "debug=True" to the function.
 
