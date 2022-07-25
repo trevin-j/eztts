@@ -1,6 +1,6 @@
 import requests
-from bs4 import BeautifulSoup
 import urllib.parse
+
 
 class Voice:
     """
@@ -125,19 +125,20 @@ def save_tts_mp3(text: str, filename: str, voice: str=Voice.EnglishUS.ALICE, lan
         with open("tts_debug.html", "w") as f:
             f.write(response.text)
 
-    # Load the html into BeautifulSoup
-    soup = BeautifulSoup(response.text, "html.parser")
-
     if debug:
         print("Retrieving audio url...")
+    
+    # In the response.text, find the source tag with the mp3 audio
+    try:
+        audio_src = response.text.split("<source src=\"")[1].split("\"")[0]
+    # If it is an index error, this is probably because src= uses single quotes instead of double quotes
+    except IndexError:
+        audio_src = response.text.split("<source src='")[1].split("'")[0]
 
-    # Get the source tag of the audio
-    audio_tag = soup.find("source")
-
-    # Get the value of src attribute
-    audio_src = audio_tag.get("src")
 
     if debug:
+        print("Audio url retrieved.")
+        print("Audio url: " + url + audio_src)
         print("Downloading audio file...")
 
     # Use requests to get the audio at the src url, which is a local url on the server
