@@ -10,6 +10,7 @@ class FTTSAdapter(APIAdapter):
     #  key: common language name
     #  value: adapter specific language name
     LANGUAGES = {
+        "English": "US English",
         "US English": "US English",
         "UK English": "British English",
         "French": "French",
