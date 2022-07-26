@@ -75,7 +75,7 @@ def tts(p_text: str,
                 break
         # If we didn't find a valid adapter, raise an error
         if not adapter:
-            raise ValueError("Language and voice combination not supported by any adapters.")
+            raise ValueError("Language and voice combination not supported by any adapters. This could mean an optional dependency is not installed.")
     
     elif p_voice_name is not None:
         for i_adapter in valid_adapters:
@@ -84,7 +84,7 @@ def tts(p_text: str,
                 adapter = i_adapter
                 break
         if not adapter:
-            raise ValueError("Voice not supported by any adapters.")
+            raise ValueError("Voice not supported by any adapters. This could mean an optional dependency is not installed.")
 
     elif p_language is not None:
         for i_adapter in valid_adapters:
@@ -93,7 +93,7 @@ def tts(p_text: str,
                 adapter = i_adapter
                 break
         if not adapter:
-            raise ValueError("Language not supported by any adapters.")
+            raise ValueError("Language not supported by any adapters. This could mean an optional dependency is not installed.")
 
     else:
         # If no adapter or language is specified, use the first adapter
