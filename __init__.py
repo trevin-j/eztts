@@ -1,9 +1,15 @@
 from .adapters.api_adapter import APIAdapter
-from .adapters.ftts_adapter import FTTSAdapter
 
 valid_adapters = []
 
+from .adapters.ftts_adapter import FTTSAdapter
 valid_adapters.append(FTTSAdapter)
+
+try:
+    from .adapters.gtts_adapter import GTTSAdapter
+    valid_adapters.append(GTTSAdapter)
+except ImportError:
+    pass
 
 
 def tts(p_text: str,
