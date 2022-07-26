@@ -8,7 +8,7 @@ setup(
     author="Trevin Jones",
     author_email="trevindjones@gmail.com",
     license="MIT",
-    packages=["eztts"],
+    packages=find_packages(),
     zip_safe=True,
     install_requires=[
         "requests",
@@ -26,5 +26,4 @@ setup(
     ],
     keywords="text-to-speech",
     long_description="A package that creates a uniform interface for dealing with multiple different TTS engines. It is modular and easy to extend.",
-    packages=find_packages()
 )
