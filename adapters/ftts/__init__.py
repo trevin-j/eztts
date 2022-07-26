@@ -1,4 +1,4 @@
-from .api_adapter import APIAdapter
+from .. import APIAdapter
 import requests
 
 class FTTSAdapter(APIAdapter):

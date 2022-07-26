@@ -1,12 +1,12 @@
-from .adapters.api_adapter import APIAdapter
+from .adapters import APIAdapter
 
 valid_adapters = []
 
-from .adapters.ftts_adapter import FTTSAdapter
+from .adapters.ftts import FTTSAdapter
 valid_adapters.append(FTTSAdapter)
 
 try:
-    from .adapters.gtts_adapter import GTTSAdapter
+    from .adapters.gtts import GTTSAdapter
     valid_adapters.append(GTTSAdapter)
 except ImportError:
     pass
