@@ -85,15 +85,27 @@ class GTTSAdapter(APIAdapter):
         # The first part goes in the lang parameter.
         # The second part goes in the tld parameter.
         # The slow parameter is set to the value of self._adapter_specific_speed.
+        if self._debug:
+            print("Generating TTS...")
+            print("Preparing voice data...")
         tld = self._adapter_specific_language.split("|")[1]
         lang = self._adapter_specific_language.split("|")[0]
         slow = self._adapter_specific_speed
 
+        if self._debug:
+            print("Generating TTS...")
         self.__tts = gTTS(text=text, tld=tld, lang=lang, slow=slow)
 
+        if self._debug:
+            print("TTS generated.")
 
     def save_tts(self, filename: str) -> None:
         """
         Save TTS to file.
         """
+        if self._debug:
+            print("Saving TTS to file: " + filename)
         self.__tts.save(filename)
+
+        if self._debug:
+            print("TTS saved.")
