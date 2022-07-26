@@ -12,3 +12,6 @@ Lib/
 Scripts/
 pyvenv.cfg
 Include/
+
+# Python cache
+**/__pycache__
