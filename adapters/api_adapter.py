@@ -1,6 +1,5 @@
 import os
 import urllib.parse
-import requests
 
 class APIAdapter:
     """
