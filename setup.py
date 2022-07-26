@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import find_packages, setup
 
 setup(
     name="eztts",
@@ -25,5 +25,6 @@ setup(
         "Programming Language :: Python :: 3",
     ],
     keywords="text-to-speech",
-    long_description="A package that creates a uniform interface for dealing with multiple different TTS engines. It is modular and easy to extend."
+    long_description="A package that creates a uniform interface for dealing with multiple different TTS engines. It is modular and easy to extend.",
+    packages=find_packages()
 )
