@@ -2,7 +2,7 @@ from .api_adapter import APIAdapter
 
 class CLASSNAME(APIAdapter):
     """
-    An adapter for the fromtexttospeech.com API.
+    An adapter template for TTS adapters.
     """
 
     # LANGUAGES structure:
