@@ -1,2 +1,2 @@
--r requirements.txt
--r gtts_adapter_requirements.txt
+-r adapters/gtts/requirements.txt
+-r adapters/ftts/requirements.txt
