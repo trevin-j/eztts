@@ -1,0 +1,2 @@
+-r requirements.txt
+-r gtts_adapter_requirements.txt
