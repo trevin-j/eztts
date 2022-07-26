@@ -37,12 +37,6 @@ class APIAdapter:
 
         if self._debug:
             print(f"Initializing adapter for {type(self).__name__}...")
-            print("Creating temporary folder...")
-
-        # Create folder called "temp_tts_generated" if it doesn't exist
-        if not os.path.exists("temp_tts_generated"):
-            os.makedirs("temp_tts_generated")
-
 
         if self._debug:
             print("Configuring default voice...")
@@ -139,11 +133,6 @@ class APIAdapter:
         """
         if self._debug:
             print("Cleaning up after adapter...")
-            print("Deleting temporary folder...")
-
-        # Remove folder called "temp_tts_generated" if it exists
-        if os.path.exists("temp_tts_generated"):
-            os.rmdir("temp_tts_generated")
 
         
         self._take_down()
