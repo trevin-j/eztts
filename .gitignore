@@ -16,3 +16,7 @@ Include/
 
 # Python cache
 **/__pycache__
+
+# Package stuff
+eztts.egg-info/
+dist
