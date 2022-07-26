@@ -86,7 +86,7 @@ tts_adapter.finish()
 
 Usually, if you know what voice you want to use, the language will be inferred, unless there are two different language voices with the same name. In that case, you will want to specify the language, or it will default to the first language that matches the voice name. Speed is independent of language and voice, but will depend on the adapter. Selecting a language and not voice will result in the default voice for that language being used.
 
-If you have an adaptor you want to use, you can check what languages, voices, and speeds it supports.
+If you have an adapter you want to use, you can check what languages, voices, and speeds it supports.
 
 ```Python
 adapter = FTTSAdapter()
@@ -100,7 +100,7 @@ print("Supported speeds:")
 print(adapter.get_supported_speeds())
 ```
 
-Notice how we specified US English, and not just English. Each adaptor is meant to support a language without specifying the locale, but if the adapter supports multiple locales for the same language, not specifying the locale will result in the adapter picking the default locale, not every locale for that language.
+Notice how we specified US English, and not just English. Each adapter is meant to support a language without specifying the locale, but if the adapter supports multiple locales for the same language, not specifying the locale will result in the adapter picking the default locale, not every locale for that language.
 
 If we want to use the second, easier way, we can simply import and use the tts function.
 
