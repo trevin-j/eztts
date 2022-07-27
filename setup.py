@@ -12,7 +12,6 @@ setup(
     zip_safe=True,
     install_requires=[
         "requests",
-        "gTTS",
     ],
     entry_points={
         "console_scripts": [
