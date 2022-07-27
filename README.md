@@ -13,11 +13,11 @@ There are currently two adapters:
 
 ### FTTSAdapter
 
-FTTSAdapter is an adapter that takes from the hidden API at [fromtexttospeech.com](http://http://www.fromtexttospeech.com/). The API was found using web page debug tools. I'm not sure what backend the site uses for TTS generation. Supported voices, languages, and speeds can be found at the [FTTSAdapter README](adapters/ftts/README.md).
+FTTSAdapter is an adapter that takes from the hidden API at [fromtexttospeech.com](http://http://www.fromtexttospeech.com/). The API was found using web page debug tools. I'm not sure what backend the site uses for TTS generation. Supported voices, languages, and speeds can be found at the [FTTSAdapter README](./eztts/adapters/ftts/README.md).
 
 ### GTTSAdapter
 
-GTTSAdapter is an adapter that uses Google's TTS API via the [gTTS library](https://pypi.org/project/gTTS/). More info can be found at the [GTTSAdapter README](adapters/gtts/README.md).
+GTTSAdapter is an adapter that uses Google's TTS API via the [gTTS library](https://pypi.org/project/gTTS/). More info can be found at the [GTTSAdapter README](./eztts/adapters/gtts/README.md).
 
 
 ## Installation
@@ -30,19 +30,15 @@ pip install git+https://github.com/trevin-j/eztts.git
 
 This will automatically install this package, along with all its dependencies, even optional ones.
 
-### Errors that may be caused due to updated dependencies
+### Installing optional dependencies
 
-The package on master should not have any dependency issues, but if you encounter an error to do with a dependency, you can try to manually install the same version of each dependency that this package was developed with. You can try and pinpoint the exact issue by trying to install the dependencies for each adapter separately. To install the dependencies for the main package (not including any optional dependencies), run:
-
-```
-pip install -r https://raw.githubusercontent.com/trevin-j/eztts/master/requirements.txt
-```
-
-For each individual adapter, run `pip install -r https://raw.githubusercontent.com/trevin-j/eztts/master/eztts/adapters/{adapter}/requirements.txt`. For example, to install the GTTSAdapter dependencies, run:
+Some adapters for this package cannot be used unless certain optional dependencies are installed. To install these dependencies, run the following command:
 
 ```
-pip install -r https://raw.githubusercontent.com/trevin-j/eztts/master/eztts/adapters/gtts/requirements.txt
+py -m eztts --install-optional-dependencies
 ```
+
+Continue to enter the numbers of the dependencies you want to install, comma separated.
 
 ## Usage
 
@@ -119,7 +115,7 @@ This function will infer language and adapter based on voice. You can also choos
 
 Chack out each individual adapter's README files for information about voce, language, and speed options, as well as pros and cons for each adapter.
 
-To learn how to implement an adapter, see the [adapters README](adapters/README.md).
+To learn how to implement an adapter, see the [adapters README](./eztts/adapters/README.md).
 
 ## NOTES:
 
