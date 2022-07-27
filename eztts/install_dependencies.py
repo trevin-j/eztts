@@ -41,5 +41,5 @@ def install_dependencies(branch: str):
     packages = [int(package.strip()) for package in packages]
 
     for package in packages:
-        install_dependencies_for(ALL_ADAPTERS[package])
+        install_dependencies_for(ALL_ADAPTERS[package], branch)
         
