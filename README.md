@@ -13,7 +13,7 @@ There are currently two adapters:
 
 ### FTTSAdapter
 
-FTTSAdapter is an adapter that takes from the hidden API at [fromtexttospeech.com](http://http://www.fromtexttospeech.com/). The API was found using web page debug tools. I'm not sure what backend the site uses for TTS generation. Supported voices, languages, and speeds can be found at the [FTTSAdapter README](./eztts/adapters/ftts/README.md).
+FTTSAdapter is an adapter that takes from the hidden API at [fromtexttospeech.com](http://www.fromtexttospeech.com/). The API was found using web page debug tools. I'm not sure what backend the site uses for TTS generation. Supported voices, languages, and speeds can be found at the [FTTSAdapter README](./eztts/adapters/ftts/README.md).
 
 ### GTTSAdapter
 
