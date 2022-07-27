@@ -25,7 +25,7 @@ GTTSAdapter is an adapter that uses Google's TTS API via the [gTTS library](http
 Currently, this package is not on PyPI. However, it is available here on github, and can be installed with pip:
 
 ```
-pip install git+https://github.com/trevin-j/eztts.git
+pip install git+https://github.com/trevin-j/eztts.git@master
 ```
 
 This will automatically install this package, along with all its dependencies, even optional ones.
