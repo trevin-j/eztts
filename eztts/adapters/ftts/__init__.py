@@ -1,4 +1,4 @@
-from .. import APIAdapter
+from eztts.adapters import APIAdapter
 import requests
 
 class FTTSAdapter(APIAdapter):
