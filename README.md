@@ -1,112 +1,124 @@
 # EZTTS
 
-Easy Text To Speech is a simple Python module used to generate speech from text. It has support for multiple voices and languages.
+Easy Text To Speech is a Python package designed to make TTS in Python easy. It includes a simple interface to multiple different TTS APIs, and a modular framework for adding new TTS engines.
 
-I'm not even sure if I'm really supposed to just use fromtexttospeech.com's hidden API, but oh well. Its robots.txt file doesn't really block anything and I couldn't find any restrictions on usage. I am curious what API this website uses for TTS in its backend.
+Support for different languages, voices, speeds, etc. are dependent upon the individual adapters.
 
-## Supported Languages, Voices, and Speeds
 
-### Supported Languages
-* US English
-* UK English
-* French
-* Spanish
-* German
+## Supported Languages, Voices, etc.
 
-### Supported Voices
-* US English:
-    * Alice
-    * Daisy
-    * George
-    * Jenna
-    * John
-* UK English:
-    * Emma
-    * Harry
-* French:
-    * Jade
-    * Gabriel
-* Spanish:
-    * Isabella
-    * Mateo
-* German:
-    * Michael
-    * Nadine
+As previously mentioned, support for languages, voices, etc. comes from the individual adapters.
 
-### Supported Speeds
-* Slow
-* Normal
-* Fast
-* Very Fast
+There are currently two adapters:
+
+### FTTSAdapter
+
+FTTSAdapter is an adapter that takes from the hidden API at [fromtexttospeech.com](http://http://www.fromtexttospeech.com/). The API was found using web page debug tools. I'm not sure what backend the site uses for TTS generation. Supported voices, languages, and speeds can be found at the [FTTSAdapter README](./eztts/adapters/ftts/README.md).
+
+### GTTSAdapter
+
+GTTSAdapter is an adapter that uses Google's TTS API via the [gTTS library](https://pypi.org/project/gTTS/). More info can be found at the [GTTSAdapter README](./eztts/adapters/gtts/README.md).
+
 
 ## Installation
 
-This isn't currently a *package on PyPI, so to use, simply clone the repo and copy the `eztts.py` file, or just directly download the file and put it in your project.
-
-### Dependencies
-
-The following commands can be run to install the dependencies:
+Currently, this package is not on PyPI. However, it is available here on github, and can be installed with pip:
 
 ```
-pip install requests
-pip install beautifulsoup4
+pip install git+https://github.com/trevin-j/eztts.git@master
 ```
 
-If the module will not work for whatever reason with the above commands, you can download the requirements.txt file and run the following command:
+This will automatically install this package, along with all its dependencies, even optional ones.
+
+### Installing optional dependencies
+
+Some adapters for this package cannot be used unless certain optional dependencies are installed. To install these dependencies, run the following command:
 
 ```
-pip install -r requirements.txt
+py -m eztts --install-optional-dependencies
 ```
 
-This will install specific versions of each dependency.
-
-Note: beautifulsoup4 is only used in one single line, so in future versions of this module, it may be removed as a dependency.
-
+Continue to enter the numbers of the dependencies you want to install, comma separated.
 
 ## Usage
 
-Using the module is super simple.
+It is very simple and easy to use this package. The package supports importing into a Python module, or running in the command line.
 
-### Import the module:
+### Command Line Usage
 
-```Python
-import eztts
+Use the command line to generate TTS. Invoke the program by running either `py -m eztts` (Windows), or `python3 -m eztts` (Linux/Mac), or even by simply `eztts`. The program requires arguments to process TTS. The most basic of a command is:
+
+```
+eztts -t "Hello, world!" -f "hello.mp3"
 ```
 
-### Generating a TTS mp3 file:
+Run `eztts --help` for more information.
 
-Simple way:
 
-```Python
-eztts.save_tts_mp3("Text to turn to speech", "output.mp3")
-```
+### Python Module Usage
 
-This will generate speech using the default voice "Alice", which is a US English voice. It also defaults to "medium" speed.
-
-Configurable:
-
-Voice, language, and speed can all be adjusted. Take a look at the docstrings for each class to see what is supported.
-
-If you configure a voice, you only have to specify the language if it is **not** a US English voice. However, you **must** specify it if you are using a non-US English voice.
-
-Using Harry voice, which is a brittish voice, in slow speed, generated to `harry_tts.mp3`:
+There are two ways to use this as a module. One way is more verbose, and the other way requires only a single line of code, and that single function does the first way under the hood, as well as take care of a bunch of stuff automatically for us. The first way involves importing the specific adapter that you want to use:
 
 ```Python
-text = "But I'm just Harry."
-fileout = "harry_tts.mp3"
-voice = eztts.Voice.EnglishUK.HARRY
-language = eztts.Language.ENGLISH_UK
-speed = eztts.Speed.SLOW
-eztts.save_tts_mp3(text, fileout, voice=voice, language=language, speed=speed)
+from eztts.adapters.ftts import FTTSAdapter
 ```
 
-Specifying parameters:
-* Voice: `eztts.Voice.{Language}.{NAME}`
-* Language: `eztts.Language.{LANGUAGE_NAME}`
-* Speed: `eztts.Speed.{SPEED_NAME}`
+From here, the steps are:
+1. Initialize
+2. Configure
+3. Generate
+4. Save
+5. Finish
 
-Also, you may print logging info to the console, and save a degub html file by passing "debug=True" to the function.
+In the code, it looks like this:
 
-### Exceptions
+```Python
+tts_adapter = FTTSAdapter(debug=True)
+tts_adapter.configure_voice(voice="Harry", speed="fast")
+tts_adapter.generate_tts("Hello, I'm Harry.")
+tts_adapter.save_tts("hello.mp3")
+tts_adapter.finish()
+```
 
-I haven't spent much time working out the errors, so you'll probably run into them. They will likely be thrown only with network errors of some sort. You'll have to deal with them outside of the function. If you run into a reocurring issue, open an issue on the GitHub repo.
+Usually, if you know what voice you want to use, the language will be inferred, unless there are two different language voices with the same name. In that case, you will want to specify the language, or it will default to the first language that matches the voice name. Speed is independent of language and voice, but will depend on the adapter. Selecting a language and not voice will result in the default voice for that language being used.
+
+If you have an adapter you want to use, you can check what languages, voices, and speeds it supports.
+
+```Python
+adapter = FTTSAdapter()
+print("Supported languages:")
+print(adapter.get_supported_languages())
+
+print("Supported English US voices:")
+print(adapter.get_supported_voices_by_language("US English"))
+
+print("Supported speeds:")
+print(adapter.get_supported_speeds())
+```
+
+Notice how we specified US English, and not just English. Each adapter is meant to support a language without specifying the locale, but if the adapter supports multiple locales for the same language, not specifying the locale will result in the adapter picking the default locale, not every locale for that language.
+
+If we want to use the second, easier way, we can simply import and use the tts function.
+
+```Python
+from eztts import tts
+
+tts(
+    text="Hello, world!",
+    filename="hello.mp3",
+    voice="Harry",
+    speed="medium"
+)
+```
+
+This function will infer language and adapter based on voice. You can also choose to specify either one, or both. Picking incompatible combinations will result in an error, however. In order to specify an adapter, you must import it and pass the *class* (not an instance of the class) as the specified_adapter parameter.
+
+Chack out each individual adapter's README files for information about voce, language, and speed options, as well as pros and cons for each adapter.
+
+To learn how to implement an adapter, see the [adapters README](./eztts/adapters/README.md).
+
+## NOTES:
+
+1. This project is in no way affiliated with Google, or any other company or organization which provides TTS services through APIs. These APIs may not even be official, and upstream changes may happen without notice and break adapters for this project.
+
+2. Many TTS configurations are not fully tested, and there may be issues with some voice configurations.

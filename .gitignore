@@ -12,3 +12,11 @@ Lib/
 Scripts/
 pyvenv.cfg
 Include/
+.venv/
+
+# Python cache
+**/__pycache__
+
+# Package stuff
+eztts.egg-info/
+dist
