@@ -15,6 +15,7 @@ def main():
     parser.add_argument("-l", "--language", help="The language of the text. Defaults to English US.")
     parser.add_argument("-q", "--quiet", help="If passed, do not display log messages.", action="store_true")
     parser.add_argument("--install-optional-dependencies", help="If passed, install optional dependencies.", action="store_true")
+    parser.add_argument("--branch", help="If passed, install optional dependencies from a specific git branch.", default="master")
 
     args = parser.parse_args()
 
@@ -48,7 +49,7 @@ def main():
         )
 
     if args.install_optional_dependencies:
-        install_dependencies()
+        install_dependencies(args.branch)
 
 
 if __name__ == "__main__":

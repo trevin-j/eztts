@@ -14,15 +14,15 @@ def url_exists(path):
         return False
 
 
-def install_dependencies_for(package_name: str):
-    requirements_txt_url = f"https://raw.githubusercontent.com/trevin-j/eztts/master/eztts/adapters/{package_name}/requirements.txt"
+def install_dependencies_for(package_name: str, branch: str):
+    requirements_txt_url = f"https://raw.githubusercontent.com/trevin-j/eztts/{branch}/eztts/adapters/{package_name}/requirements.txt"
     if url_exists(requirements_txt_url):
         subprocess.check_call([sys.executable, '-m', 'pip', 'install', '-r', requirements_txt_url])
     else:
         print(f"No requirements.txt found for {package_name}. Skipping.")
 
 
-def install_dependencies():
+def install_dependencies(branch: str):
     """
     Ask user for which adapters to install dependencies.
     """
