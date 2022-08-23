@@ -113,7 +113,7 @@ tts(
 
 This function will infer language and adapter based on voice. You can also choose to specify either one, or both. Picking incompatible combinations will result in an error, however. In order to specify an adapter, you must import it and pass the *class* (not an instance of the class) as the specified_adapter parameter.
 
-Chack out each individual adapter's README files for information about voce, language, and speed options, as well as pros and cons for each adapter.
+Check out each individual adapter's README files for information about voice, language, and speed options, as well as pros and cons for each adapter.
 
 To learn how to implement an adapter, see the [adapters README](./eztts/adapters/README.md).
 
