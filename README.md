@@ -28,7 +28,7 @@ Currently, this package is not on PyPI. However, it is available here on github,
 pip install git+https://github.com/trevin-j/eztts.git@master
 ```
 
-This will automatically install this package, along with all its dependencies, even optional ones.
+This will automatically install this package, along with all its required dependencies, *but not optional ones*.
 
 ### Installing optional dependencies
 
