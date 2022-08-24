@@ -3,7 +3,7 @@ import subprocess
 
 import requests
 
-from .all_adapters import ALL_ADAPTERS
+from .adapter_manifest import ADAPTER_MANIFEST
 
 
 def url_exists(path):
@@ -29,8 +29,11 @@ def install_dependencies(branch: str):
     # Menu
     print("Which adapter(s) would you like to install dependencies for?")
 
-    for i, adapter in enumerate(ALL_ADAPTERS):
-        print("{}: {}".format(i, adapter))
+    adapter_pkg_names = []
+    for i, adapter in enumerate(ADAPTER_MANIFEST):
+        if ADAPTER_MANIFEST[str(adapter)]["remote_requirements_txt"]:
+            adapter_pkg_names.append(str(adapter))
+            print(f"{len(adapter_pkg_names) - 1}: {str(adapter)}")
 
     # Get user input
     packages = input("> ")
@@ -41,5 +44,5 @@ def install_dependencies(branch: str):
     packages = [int(package.strip()) for package in packages]
 
     for package in packages:
-        install_dependencies_for(ALL_ADAPTERS[package], branch)
+        install_dependencies_for(adapter_pkg_names[package], branch)
         

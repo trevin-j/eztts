@@ -2,7 +2,7 @@ from setuptools import find_packages, setup
 
 setup(
     name="eztts",
-    version="0.2.0",
+    version="0.3.0",
     description="A simple, easy-to-use interface for multiple text-to-speech engines",
     url="https://github.com/trevin-j/eztts",
     author="Trevin Jones",
