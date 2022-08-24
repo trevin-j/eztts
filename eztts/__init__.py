@@ -1,16 +1,8 @@
 from .adapters import APIAdapter
 
-valid_adapters = []
+from .adapter_importer import valid_adapters, safe_import_all_adapters
 
-from .adapters.ftts import FTTSAdapter
-valid_adapters.append(FTTSAdapter)
-
-try:
-    from .adapters.gtts import GTTSAdapter
-    valid_adapters.append(GTTSAdapter)
-except ImportError:
-    pass
-
+safe_import_all_adapters()
 
 def tts(text: str,
         filename: str,
@@ -45,6 +37,13 @@ def tts(text: str,
     Speed is independent of language and voice. If not specified, it will be set to the default.
     If the adapter does not support the selected speed, it will override to the default.
     """
+
+
+    def _unsupported_adapter_error():
+        """Used to raise error of unsupported adapter."""
+        raise ValueError("Language and voice combination not supported by any adapters. This could mean an optional dependency is not installed.")
+
+
     adapter = None
 
     if specified_adapter is not None:
@@ -74,7 +73,7 @@ def tts(text: str,
                 break
         # If we didn't find a valid adapter, raise an error
         if not adapter:
-            raise ValueError("Language and voice combination not supported by any adapters. This could mean an optional dependency is not installed.")
+            _unsupported_adapter_error()
     
     elif voice_name is not None:
         for i_adapter in valid_adapters:
@@ -83,7 +82,7 @@ def tts(text: str,
                 adapter = i_adapter
                 break
         if not adapter:
-            raise ValueError("Voice not supported by any adapters. This could mean an optional dependency is not installed.")
+            _unsupported_adapter_error()
 
     elif language is not None:
         for i_adapter in valid_adapters:
@@ -92,7 +91,7 @@ def tts(text: str,
                 adapter = i_adapter
                 break
         if not adapter:
-            raise ValueError("Language not supported by any adapters. This could mean an optional dependency is not installed.")
+            _unsupported_adapter_error()
 
     else:
         # If no adapter or language is specified, use the first adapter
