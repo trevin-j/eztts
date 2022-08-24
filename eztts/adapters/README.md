@@ -39,7 +39,7 @@ SPEEDS = {
 
 Since FTTS does not support `very slow`, it is not included. For speed, if the user chooses an unsupported speed, the default speed will be used. We will cover defaults later.
 
-gTTS takes a different approach to specifying speeds. Since the way we interact with gTTS speed is through a boolean (`speed=`), gTTS speeds are specified like so:
+gTTS takes a different approach to specifying speeds. Since the way we interact with gTTS speed is through a boolean (`slow=`), gTTS speeds are specified like so:
 
 ```Python
 SPEEDS = {
@@ -106,45 +106,34 @@ tts("Hello, world!", "test.mp3", adapter=MyTTSAdapter)
 Even though we specified the adapter, which means it would override the valid adapters anyways, appending it to the list of valid adapters makes the tts function support searching our adapter and using it if it supports a specified voice.
 
 
-The second option is to add the adapter to the package. This involves modifying the source of this package, and is recommended if you plan to contribute to, or at least fork, this package.
+The second option is to add the adapter to the package. This involves modifying the source of this package, and is recommended if you plan to contribute to this package.
 
-First, add your adapter folder to the folder of packages. Don't forget to include a readme in your folder to document your adapter!
+First, add your adapter folder to the eztts package's "adapters" folder. Don't forget to include a readme in your folder to document your adapter! If your adapter has any dependencies that aren't required by the rest of the eztts package, be sure to include them in a requirements.txt file inside your adapter's folder.
 
-Now, we need to modify the \_\_init__.py file in the eztts folder. Simply add an import statement and append the class to valid_adapters.
+As of eztts version 0.3.0, you no longer have to manually import newly created adapters in order to add them to the package. Instead, you will include your adapter in an adapter manifest file, where eztts will automatically and dynamically import your adapter, if it can.
 
-```Python
-from .adapters import APIAdapter
-
-valid_adapters = []
-
-from .adapters.ftts import FTTSAdapter
-valid_adapters.append(FTTSAdapter)
-
-# Add our new adapter, MyTTSAdapter
-from .adapters.my_tts_adapter import MyTTSAdapter
-valid_adapters.append(MyTTSAdapter)
-
-...
-```
-
-If our new adapter requires any packages that are not required by the base package, these will be considered optional dependencies that are reqiured to use this adapter. So, when we import it and add it, we need to surround with try/except statements in case the dependencies are not installed.
+Since you have now added your adapter's folder to the package, you can add your adapter to the `adapter_manifest.py` file. After adding to the manifest, the manifest file might look something like this:
 
 ```Python
-from .adapters import APIAdapter
-
-valid_adapters = []
-
-from .adapters.ftts import FTTSAdapter
-valid_adapters.append(FTTSAdapter)
-
-# Add our new adapter, MyTTSAdapter, which has an optional dependency
-try:
-    from .adapters.my_tts_adapter import MyTTSAdapter
-    valid_adapters.append(MyTTSAdapter)
-except ImportError:
-    pass
-
-...
+ADAPTER_MANIFEST = {
+    "ftts": {
+        "import_location": ".adapters.ftts",
+        "class_name": "FTTSAdapter",
+        "remote_requirements_txt": False,
+    },
+    "gtts": {
+        "import_location": ".adapters.gtts",
+        "class_name": "GTTSAdapter",
+        "remote_requirements_txt": True,
+    },
+    ...
+    # Here is your new adapter
+    "mytts": {
+        "import_location": ".adapters.mytts",   # The import location of your adapter. The "." means relative to this manifest module. This location should be ".adapters.{name}" if the adapter will be permanent.
+        "class_name": "MyTTSAdapter",           # The class name of your adapter.
+        "remote_requirements_txt": False,       # Only set this to true if both of the following are true: This adapter has additional requirements, and the requirements.txt file is on the master branch. The dependency installer uses this value to determine if you can and need to install additional dependencies for this adapter.
+    }
+}
 ```
 
-We also need to include requirements.txt in our adapter's folder so that the optional dependencies are installed if the user chooses. Also, modify the all_adapters file, and add the name of your adapter folder to the list.
+And you're done! Create a pull request to contribute your adapter to the package!
